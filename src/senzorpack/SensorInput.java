@@ -1,10 +1,10 @@
 
 public class SensorInput {
 	
-	// klasse som skal måle verdiene fra sensoren og gi avstanden.
-	// getDistance skal være static og kunne kalles fra klassen CalculateSeconds
+	// klasse som skal mï¿½le verdiene fra sensoren og gi avstanden.
+	// getDistance skal vï¿½re static og kunne kalles fra klassen CalculateSeconds
 	
-	private final static float SIGNAL_SPEED = 340.29f;  // speed of signal in m/s (speed of sound). 
+	private final static float SIGNAL_SPEED = 340.29f;  // speed of signal in m/s (speed of sound).
 
 	
 	public float measureDistance(){
