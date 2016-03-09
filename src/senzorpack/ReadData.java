@@ -33,22 +33,26 @@ public class ReadData {
 	    }
 	}
 	
-//	private static SpeedResults(URLString){
-//		
-//	}
-
 	
 	public static void Main(String[] args) throws Exception{
-		ReadData rd = new ReadData();
-		rd.readUrl("http://openxcplatform.com.s3.amazonaws.com/traces/nyc/uptown-west2.json");
+//		ReadData rd = new ReadData();
+//		rd.readUrl("http://openxcplatform.com.s3.amazonaws.com/traces/nyc/uptown-west2.json");
 		
 //		String json = readUrl("http://openxcplatform.com.s3.amazonaws.com/traces/nyc/uptown-west2.json");
-//		Gson gson = new Gson();
+//		Json gson = new Json();
 //		ReadData readdata = gson.fromJson(json, ReadData.class);
 //		
 //		System.out.println(ReadData.speed);
 //		
-		
+		try{
+			JSONObject json = new JSONObject(readUrl("http://openxcplatform.com.s3.amazonaws.com/traces/nyc/uptown-west2.json"));
+			String title = (String) json.get("title");
+			
+		}
+		catch (JSONException e){
+			e.printStackTrace();
+			
+		}
 	}
 
 }
