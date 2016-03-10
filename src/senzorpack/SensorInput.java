@@ -1,5 +1,5 @@
 
-public class SensorInput {
+/*public class SensorInput {
 	
 	// klasse som skal m�le verdiene fra sensoren og gi avstanden.
 	// getDistance skal v�re static og kunne kalles fra klassen CalculateSeconds
@@ -38,4 +38,4 @@ public class SensorInput {
 
 	}
 
-}
+}*/

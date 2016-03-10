@@ -6,7 +6,7 @@ public class CalculateSecondsTest {
 
     private double distance = 99999;
     private double speed = 99999;
-    CalculateSeconds seconds = new CalculateSeconds(speed, distance);
+    CalculateSeconds seconds = new CalculateSeconds(distance);
 
     @Test
     public void CalculateSpeed1(){

@@ -15,10 +15,10 @@ public class CalculateSeconds {
 	 * @param speed of the vehicle
 	 */
 	public CalculateSeconds(double distance, double speed){
-		checkSpeed(speed); 
+		checkSpeed(speed);
 		checkDistance(distance);
 		reader = new ReadData();
-        reader.read("data.txt");
+        reader.read("velocity_car_1.txt");
 	}
 
 
