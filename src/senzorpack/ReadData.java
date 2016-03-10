@@ -15,9 +15,9 @@ public class ReadData {
 
 
 
-    public void read() {
+    public void read(String filename) {
 
-		try (BufferedReader br = new BufferedReader(new FileReader("data.txt"))){
+		try (BufferedReader br = new BufferedReader(new FileReader(filename))){
 
 			String sCurrentLine;
 
@@ -37,9 +37,9 @@ public class ReadData {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		ReadData reader = new ReadData();
-		reader.read();
-	}
+		reader.read("data.txt");
+	}*/
 
 }
