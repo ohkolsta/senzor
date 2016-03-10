@@ -2,15 +2,20 @@
  * Created by thomaskleiven on 09.03.2016.
  */
 
+import com.sun.xml.internal.rngom.digested.DDataPattern;
+
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 public class ReadData {
 
-	public void read() {
+    ArrayList<Double> velocity = new ArrayList<Double>();
 
-		
+
+
+    public void read() {
 
 		try (BufferedReader br = new BufferedReader(new FileReader("data.txt"))){
 
@@ -19,8 +24,11 @@ public class ReadData {
 			while ((sCurrentLine = br.readLine()) != null) {
 				if (sCurrentLine.startsWith("{\"name\":\"vehicle_speed\",\"value\":")) {
 					sCurrentLine = sCurrentLine.substring(32);
-					System.out.println(Double.valueOf(sCurrentLine.substring(0,
-							sCurrentLine.indexOf(','))));
+                    velocity.add(Double.valueOf(sCurrentLine.substring(0,
+                            sCurrentLine.indexOf(','))));
+                    /*for(double vel : velocity){
+                        System.out.println(vel);                                   Kommenter bort denne om du vil printe
+                    }*/
 				}
 			}
 
