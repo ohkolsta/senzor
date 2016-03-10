@@ -22,8 +22,6 @@ public class ReadData {
 	 * reads velocity from file and adds it velocity-list
 	 * @param filename filename of the file read
 	 */
-
-
     public void read(String filename) {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filename))){
