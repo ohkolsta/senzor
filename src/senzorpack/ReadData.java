@@ -11,8 +11,17 @@ import java.util.ArrayList;
 
 public class ReadData {
 
+
+    /**
+     * list with all velocities
+     */
     ArrayList<Double> velocity = new ArrayList<Double>();
 
+
+	/**
+	 * reads velocity from file and adds it velocity-list
+	 * @param filename filename of the file read
+	 */
 
 
     public void read(String filename) {
@@ -26,9 +35,6 @@ public class ReadData {
 					sCurrentLine = sCurrentLine.substring(32);
                     velocity.add(Double.valueOf(sCurrentLine.substring(0,
                             sCurrentLine.indexOf(','))));
-                    /*for(double vel : velocity){
-                        System.out.println(vel);                                   Kommenter bort denne om du vil printe
-                    }*/
 				}
 			}
 
@@ -36,10 +42,4 @@ public class ReadData {
 			e.printStackTrace();
 		}
 	}
-
-	/*public static void main(String[] args) throws Exception {
-		ReadData reader = new ReadData();
-		reader.read("data.txt");
-	}*/
-
 }
