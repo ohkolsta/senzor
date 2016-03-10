@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class CalculateSeconds {
 	
 	/**
@@ -5,6 +7,7 @@ public class CalculateSeconds {
 	 */
 	public double distance;
 	public double speed;
+	public ReadData reader;
 
 	/**
 	 * sets distance and speed variables
@@ -14,6 +17,8 @@ public class CalculateSeconds {
 	public CalculateSeconds(double distance, double speed){
 		checkSpeed(speed); 
 		checkDistance(distance);
+		reader = new ReadData();
+        reader.read("data.txt");
 	}
 
 
@@ -55,6 +60,8 @@ public class CalculateSeconds {
 			throw new IllegalArgumentException();
 		}
 	}
+
+
 	
 	/**
 	 * checks if distance is positive, sets distance or throws argument
@@ -71,17 +78,17 @@ public class CalculateSeconds {
 	}
 	
 	/**
-	 * sets speed
-	 * @param speed car speed
+	 * sets speed from file
 	 */
-	private void setSpeed(double speed){
-		this.speed = speed;
-	}
+	private void setSpeed(){
+        this.speed = reader.velocity.remove(0);
+    }
 	
 	/**
 	 * returns distance
 	 * @return distance
 	 */
+
 	private double getDistance(){
 		return this.distance;
 	}
@@ -93,6 +100,22 @@ public class CalculateSeconds {
 	private double getSpeed(){
 		return this.speed;
 	}
+
+    /**
+     * Calculates warning every half second using the speed from file
+     */
+
+    private void CalculateWarningEveryHalfSecond(){
+        while (reader.velocity.size() != 0) {
+            setSpeed();
+            warning(getDistance(), getSpeed());
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e){
+                System.out.println("Thread error");
+            }
+        }
+    }
 	
 	/**
 	 * converts speed form kph to m/s
@@ -107,9 +130,9 @@ public class CalculateSeconds {
 	/**
 	 * runs the code
 	 */
-	public static void main(String [] args){
-		CalculateSeconds c = new CalculateSeconds(100,40);
-		c.warning(c.getDistance(), c.getSpeed());
+	public static void main(String [] args) throws InterruptedException{
+        CalculateSeconds c = new CalculateSeconds(100,40);
+        c.CalculateWarningEveryHalfSecond();
 	}
 	
 }
