@@ -26,9 +26,10 @@ public abstract class Car {
             checkSpeed(this.speed);
             checkDistance(this.distance);
             setSpeed();
+            //setDistance();
             warning(this.getDistance(), this.getSpeed());
             try {
-                Thread.sleep(5);
+                Thread.sleep(500);
             } catch (InterruptedException e){
                 System.out.println("Thread error");
             }
@@ -42,7 +43,7 @@ public abstract class Car {
      */
     protected void checkSpeed(double speed){
         if (speed >= 0){
-            this.speed = convertSpeedToMs(speed);
+            this.speed = convertSpeedToMsFromMilesPerHour(speed);
         }else{
             System.out.println("For lav hastighet");
             throw new IllegalArgumentException();
@@ -103,8 +104,8 @@ public abstract class Car {
      * @param speedInKph speed in Kph
      * @return speed in m/s
      */
-    public double convertSpeedToMs(double speedInKph){
-        return speedInKph/3.6;
+    public double convertSpeedToMsFromMilesPerHour(double speedInKph){
+        return speedInKph/0.44704;
     }
 
         /**
