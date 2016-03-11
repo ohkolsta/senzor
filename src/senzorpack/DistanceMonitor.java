@@ -1,3 +1,6 @@
+
+
+
 /**
  * Class to monitor distance measured by an HC-SR04 distance sensor on a 
  * Raspberry Pi.
@@ -25,7 +28,7 @@ public class DistanceMonitor {
     private final static float SOUND_SPEED = 340.29f;  // speed of sound in m/s
     
     private final static int TRIG_DURATION_IN_MICROS = 10; // trigger duration of 10 micro s
-    private final static int WAIT_DURATION_IN_MILLIS = 60; // wait 60 milli s
+    public final static int WAIT_DURATION_IN_MILLIS = 60; // wait 60 milli s
 
     private final static int TIMEOUT = 2100;
     
@@ -34,10 +37,14 @@ public class DistanceMonitor {
     private final GpioPinDigitalInput echoPin;
     private final GpioPinDigitalOutput trigPin;
             
-    private DistanceMonitor( Pin echoPin, Pin trigPin ) {
+    public DistanceMonitor( Pin echoPin, Pin trigPin ) {
         this.echoPin = gpio.provisionDigitalInputPin( echoPin );
         this.trigPin = gpio.provisionDigitalOutputPin( trigPin );
         this.trigPin.low();
+        try {
+            Thread.sleep(300);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+        }
     }
     
     /*
@@ -101,32 +108,11 @@ public class DistanceMonitor {
         
         return (long)Math.ceil( ( end - start ) / 1000.0 );  // Return micro seconds
     }
-    
-    public static void main( String[] args ) {
-        Pin echoPin = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
-        Pin trigPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 7)
-        DistanceMonitor monitor = new DistanceMonitor( echoPin, trigPin );
-        
-        while( true ) {
-            try {
-                System.out.printf( "%1$d,%2$.3f%n", System.currentTimeMillis(), monitor.measureDistance() );
-            }
-            catch( TimeoutException e ) {
-                System.err.println( e );
-            }
-
-            try {
-                Thread.sleep( WAIT_DURATION_IN_MILLIS );
-            } catch (InterruptedException ex) {
-                System.err.println( "Interrupt during trigger" );
-            }
-        }
-    }
 
     /**
      * Exception thrown when timeout occurs
      */
-    private static class TimeoutException extends Exception {
+    public static class TimeoutException extends Exception {
 
         private final String reason;
         
