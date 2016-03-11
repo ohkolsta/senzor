@@ -1,5 +1,3 @@
-import DistanceMonitor.TimeoutException;
-
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 
@@ -14,7 +12,7 @@ public class Main {
             try {
                 System.out.println(monitor.measureDistance());
             }
-            catch( TimeoutException e ) {
+            catch( Exception e ) {
                 System.err.println( e );
             }
 
