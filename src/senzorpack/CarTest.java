@@ -2,11 +2,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class CalculateSecondsTest {
+public class CarTest {
 
-    private double distance = 99999;
-    private double speed = 99999;
-    CalculateSeconds seconds = new CalculateSeconds(speed, distance);
+    Car_1 seconds = new Car_1();
 
     @Test
     public void CalculateSpeed1(){
