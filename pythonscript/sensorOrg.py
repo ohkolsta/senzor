@@ -3,10 +3,13 @@
 # remember to change the GPIO values below to match your sensors
 # GPIO output = the pin that's connected to "Trig" on the sensor
 # GPIO input = the pin that's connected to "Echo" on the sensor
+from sys import exit
+import time
+import RPi.GPIO as GPIO
+
 
 def reading(sensor):
-	import time
-	import RPi.GPIO as GPIO
+	
 	
 	# Disable any warning message such as GPIO pins in use
 	GPIO.setwarnings(False)
@@ -85,5 +88,7 @@ def reading(sensor):
 	else:
 		print "Incorrect usonic() function varible."
 
-		
-print reading(0)
+
+for range(10):
+	print reading(0)
+print("done")
