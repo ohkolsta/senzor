@@ -3,6 +3,8 @@ import time
 import RPi.GPIO as GPIO
 
 def reading(sensor):
+
+    print "hello"
  
     GPIO.setwarnings(False)
  
@@ -11,7 +13,7 @@ def reading(sensor):
     if sensor == 0:
 
         GPIO.setup(17,GPIO.OUT)
-        GPIO.setup(22,GPIO.IN)
+        GPIO.setup(27,GPIO.IN)
         GPIO.output(17, GPIO.LOW)
 
         signaloff = 0.0
@@ -23,15 +25,12 @@ def reading(sensor):
  
         GPIO.output(17, False)
 
-        while GPIO.input(22) == 0:
+        while GPIO.input(27) == 0:
             signaloff = time.time()
 
         signalon = time.time()
 
-        #while GPIO.input(24) == 1:
-            #if (time.time() - signaloff) * 17000 > 400: #Max range of 4m
-                #raise Exception
-
+        #while GPIO.input(27) == 1:
         signalon = time.time()
  
         timepassed = signalon - signaloff
@@ -57,4 +56,4 @@ while True:
         counter = counter + 1
     except Exception:
         print ("Signal timed out")
-    time.sleep(1)
+    time.sleep(2)
