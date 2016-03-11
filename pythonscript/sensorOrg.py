@@ -7,35 +7,37 @@ import time
 import RPi.GPIO as GPIO
 
 
+
+# Disable any warning message such as GPIO pins in use
+GPIO.setwarnings(False)
+
+# use the values of the GPIO pins, and not the actual pin number
+# so if you connect to GPIO 25 which is on pin number 22, the 
+# reference in this code is 25, which is the number of the GPIO 
+# port and not the number of the physical pin
+	
+GPIO.setmode(GPIO.BCM)
+
+# point the software to the GPIO pins the sensor is using
+# change these values to the pins you are using
+# GPIO output = the pin that's connected to "Trig" on the sensor
+# GPIO input = the pin that's connected to "Echo" on the sensor
+
+GPIO.setup(17,GPIO.OUT)
+GPIO.setup(27,GPIO.IN)
+GPIO.output(17, GPIO.LOW)
+
+# found that the sensor can crash if there isn't a delay here
+# no idea why. If you have odd crashing issues, increase delay
+time.sleep(0.3)
+
 def reading(sensor):
 
-	
-	
-	# Disable any warning message such as GPIO pins in use
-	GPIO.setwarnings(False)
-	
-	# use the values of the GPIO pins, and not the actual pin number
-	# so if you connect to GPIO 25 which is on pin number 22, the 
-	# reference in this code is 25, which is the number of the GPIO 
-	# port and not the number of the physical pin
-	GPIO.setmode(GPIO.BCM)
-	
 	if sensor == 0:
 		
-		# point the software to the GPIO pins the sensor is using
-		# change these values to the pins you are using
-		# GPIO output = the pin that's connected to "Trig" on the sensor
-		# GPIO input = the pin that's connected to "Echo" on the sensor
-		GPIO.setup(17,GPIO.OUT)
-		GPIO.setup(27,GPIO.IN)
-		GPIO.output(17, GPIO.LOW)
-
 		signaloff = 0.0
 		signalon = 0.0
-		# found that the sensor can crash if there isn't a delay here
-		# no idea why. If you have odd crashing issues, increase delay
-		time.sleep(0.3)
-		
+
 		# sensor manual says a pulse ength of 10Us will trigger the 
 		# sensor to transmit 8 cycles of ultrasonic burst at 40kHz and 
 		# wait for the reflected ultrasonic burst to be received
@@ -83,9 +85,6 @@ def reading(sensor):
 		
 		# return the distance of an object in front of the sensor in cm
 		return distance
-		
-		# we're no longer using the GPIO, so tell software we're done
-		GPIO.cleanup()
 
 	else:
 		print "Incorrect usonic() function varible."
@@ -94,3 +93,6 @@ def reading(sensor):
 for x in range(10):
 	print reading(0)
 	time.sleep(1)
+
+# we're no longer using the GPIO, so tell software we're done
+GPIO.cleanup()
