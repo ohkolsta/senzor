@@ -31,8 +31,11 @@ public class ReadData {
 			while ((sCurrentLine = br.readLine()) != null) {
 				if (sCurrentLine.startsWith("{\"name\":\"vehicle_speed\",\"value\":")) {
 					sCurrentLine = sCurrentLine.substring(32);
-                    velocity.add(Double.valueOf(sCurrentLine.substring(0,
-                            sCurrentLine.indexOf(','))));
+					double speed = Double.valueOf(sCurrentLine.substring(0,
+							sCurrentLine.indexOf(',')));
+					if(speed != 0){
+						velocity.add(speed);
+					}
 				}
 			}
 
