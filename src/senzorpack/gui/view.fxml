@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 
-<Pane prefHeight="507.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+<Pane prefHeight="507.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
    <children>
       <Button fx:id="button" layoutX="274.0" layoutY="335.0" mnemonicParsing="false" onAction="#buttonPressed" text="Button" />
       <Label fx:id="label" layoutX="195.0" layoutY="74.0" prefHeight="108.0" prefWidth="273.0" text="0">
@@ -14,5 +14,6 @@
             <Font size="73.0" />
          </font>
       </Label>
+      <Button layoutX="436.0" layoutY="446.0" mnemonicParsing="false" onAction="#settingsButton" text="Settings" />
    </children>
 </Pane>
