@@ -101,11 +101,11 @@ public abstract class Car {
 
     /**
      * converts speed form kph to m/s
-     * @param speedInKph speed in Kph
+     * @param speedInMilesPerHour speed in Kph
      * @return speed in m/s
      */
-    public double convertSpeedToMsFromMilesPerHour(double speedInKph){
-        return speedInKph/0.44704;
+    public double convertSpeedToMsFromMilesPerHour(double speedInMilesPerHour){
+        return speedInMilesPerHour/0.44704;
     }
 
         /**
