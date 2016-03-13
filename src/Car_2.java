@@ -4,7 +4,7 @@
 public class Car_2 extends Car{
 
     public Car_2(){
-        reader.read("velocity_car_2.txt");
+        reader.read("cardata/velocity_car_2.txt");
     }
 
     /**
