@@ -1,6 +1,9 @@
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 
+//Denne klassen er kun for backup i tilfelle mod av DistanceMonitor ikke funker
+
+
 public class Main {
 	
     public static void main( String[] args ) {

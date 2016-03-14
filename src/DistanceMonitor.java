@@ -36,6 +36,9 @@ public class DistanceMonitor {
     
     private final GpioPinDigitalInput echoPin;
     private final GpioPinDigitalOutput trigPin;
+    
+    private final Pin echoPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
+    private final Pin trigPin = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
             
     public DistanceMonitor( Pin echoPin, Pin trigPin ) {
         this.echoPin = gpio.provisionDigitalInputPin( echoPin );
@@ -123,6 +126,23 @@ public class DistanceMonitor {
         @Override
         public String toString() {
             return this.reason;
+        }
+    }
+    
+    public void printDistance(){
+    	while( true ) {
+            try {
+                System.out.println(monitor.measureDistance());
+            }
+            catch( Exception e ) {
+                System.err.println( e );
+            }
+
+            try {
+                Thread.sleep( 1000 );
+            } catch (InterruptedException ex) {
+                System.err.println( "Interrupt during trigger" );
+            }
         }
     }
     
