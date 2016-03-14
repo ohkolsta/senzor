@@ -139,7 +139,7 @@ public class DistanceMonitor {
             }
 
             try {
-                Thread.sleep( 1000 );
+                Thread.sleep( 500 );
             } catch (InterruptedException ex) {
                 System.err.println( "Interrupt during trigger" );
             }
