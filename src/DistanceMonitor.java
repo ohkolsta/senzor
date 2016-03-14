@@ -1,15 +1,7 @@
 
-
-
-/**
- * Class to monitor distance measured by an HC-SR04 distance sensor on a 
- * Raspberry Pi.
- * 
- * The main method assumes the trig pin is connected to the pin # 7 and the echo
- * pin is connected to pin # 11.  Output of the program are comma separated lines
- * where the first value is the number of milliseconds since unix epoch, and the
- * second value is the measured distance in centimeters.
- */
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
@@ -21,7 +13,6 @@ import com.pi4j.io.gpio.RaspiPin;
 /**
  * DistanceMonitor class to monitor distance measured by sensor
  * 
- * @author Rutger Claes <rutger.claes@cs.kuleuven.be>
  */
 public class DistanceMonitor {
     
@@ -58,9 +49,9 @@ public class DistanceMonitor {
     public float measureDistance() throws TimeoutException {
         this.triggerSensor();
         this.waitForSignal();
-        long duration = this.measureSignal();
+        double duration = this.measureSignal();
         
-        return duration * SOUND_SPEED / ( 2 * 10000 );
+        return duration * SOUND_SPEED / ( 2 * 1000 ); //was 2*10000, changed to 2*1000 for converting to metres" 
     }
 
     /**
@@ -109,7 +100,7 @@ public class DistanceMonitor {
             throw new TimeoutException( "Timeout waiting for signal end" );
         }
         
-        return (long)Math.ceil( ( end - start ) / 1000.0 );  // Return micro seconds
+        return (double)Math.ceil( ( end - start ) / 1000.0 );  // Return micro seconds
     }
 
     /**
@@ -129,10 +120,10 @@ public class DistanceMonitor {
         }
     }
     
-    public void printDistance(){
+    public double void returnDistance(){
     	while( true ) {
             try {
-                System.out.println(monitor.measureDistance());
+                measureDistance();
             }
             catch( Exception e ) {
                 System.err.println( e );
@@ -145,5 +136,30 @@ public class DistanceMonitor {
             }
         }
     }
+    
+    //class for simulating data stream
+    public void read(String filename) {
+
+		try (BufferedReader br = new BufferedReader(new FileReader(filename))){
+			String sCurrentLine;
+
+			while ((sCurrentLine = br.readLine()) != null) {
+					double dist = Double.valueOf(sCurrentLine);
+					return dist;
+					}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+        
+    public static void main(String[] args){
+    	DistanceMonitor dist = new DistanceMonitor();
+    	System.out.println(dist.read("cardata/distSim.txt"));
+    }
+
+
+
+	
     
 }
