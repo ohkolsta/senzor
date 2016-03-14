@@ -2,8 +2,6 @@
  * Created by thomaskleiven on 09.03.2016.
  */
 
-import com.sun.xml.internal.rngom.digested.DDataPattern;
-
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;

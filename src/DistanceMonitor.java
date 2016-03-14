@@ -2,6 +2,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
@@ -28,12 +29,12 @@ public class DistanceMonitor {
     private final GpioPinDigitalInput echoPin;
     private final GpioPinDigitalOutput trigPin;
 
-    private final Pin echoPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
-    private final Pin trigPin = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
+    private final Pin echoPin2 = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
+    private final Pin trigPin2 = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
 
-    public DistanceMonitor( Pin echoPin, Pin trigPin ) {
-        this.echoPin = gpio.provisionDigitalInputPin( echoPin );
-        this.trigPin = gpio.provisionDigitalOutputPin( trigPin );
+    public DistanceMonitor( Pin echoPin2, Pin trigPin2 ) { //was Pin echoPin, Pin trigPin
+        this.echoPin = gpio.provisionDigitalInputPin( echoPin2 );
+        this.trigPin = gpio.provisionDigitalOutputPin( trigPin2 );
         this.trigPin.low();
         try {
             Thread.sleep(300);                 //1000 milliseconds is one second.
@@ -46,7 +47,7 @@ public class DistanceMonitor {
      *
      * @throws TimeoutException if a timeout occurs
      */
-    public float measureDistance() throws TimeoutException {
+    public double measureDistance() throws TimeoutException {
         this.triggerSensor();
         this.waitForSignal();
         double duration = this.measureSignal();
@@ -88,7 +89,7 @@ public class DistanceMonitor {
      * @return the duration of the signal in micro seconds
      * @throws DistanceMonitor.TimeoutException if no low appears in time
      */
-    private long measureSignal() throws TimeoutException {
+    private double measureSignal() throws TimeoutException {
         int countdown = TIMEOUT;
         long start = System.nanoTime();
         while( this.echoPin.isHigh() && countdown > 0 ) {
@@ -120,7 +121,7 @@ public class DistanceMonitor {
         }
     }
 
-    public double void returnDistance(){
+    public double returnDistance(){
     	while( true ) {
             try {
                 measureDistance();
@@ -138,24 +139,28 @@ public class DistanceMonitor {
     }
 
     //class for simulating data stream
-    public double read(String filename) {
+    ArrayList<Double> speed = new ArrayList<Double>();
+    
+    public void read(String filename) {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filename))){
 			String sCurrentLine;
-
+			
 			while ((sCurrentLine = br.readLine()) != null) {
-					double dist = Double.valueOf(sCurrentLine);
-					return dist;
-					}
+				double dist = Double.valueOf(sCurrentLine);
+				speed.add(dist);
+				
+				}
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
     }
 
     public static void main(String[] args){
-    	DistanceMonitor dist = new DistanceMonitor();
-    	System.out.println(dist.read("cardata/distSim.txt"));
+    	DistanceMonitor dist = new DistanceMonitor(RaspiPin.GPIO_00, RaspiPin.GPIO_00 );
+    	dist.read("cardata/distSim.txt");
+    	dist.speed.remove(0);
     }
 
 
