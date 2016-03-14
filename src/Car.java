@@ -21,6 +21,9 @@ public abstract class Car {
      * Calculates warning every half second using the speed from file
      */
 
+
+
+
     protected void CalculateWarningEveryHalfSecond(){
         while (reader.velocity.size() != 0) {
             checkSpeed(this.speed);
@@ -28,6 +31,7 @@ public abstract class Car {
             setSpeed();
             //setDistance();
             warning(this.getDistance(), this.getSpeed());
+
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e){
@@ -114,9 +118,12 @@ public abstract class Car {
          * @param speed speed the car holds
          * @return if warning should be displayed
          */
-    public double getSeconds(double distance, double speed){
-    	checkSpeed(speed);
-    	return distance/speed;
+
+    public double getSeconds(){
+        checkSpeed(this.speed);
+        checkDistance(this.distance);
+        setSpeed();
+        return (distance/speed);
     }
     
     public boolean warning(double distance, double speed){
@@ -130,5 +137,4 @@ public abstract class Car {
          }
      }
 }
-
 

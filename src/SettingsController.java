@@ -1,5 +1,3 @@
-package gui;
-
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -22,7 +20,7 @@ public class SettingsController {
 
 
 @FXML public void backButton(ActionEvent event) throws IOException{
-	Parent viewParent = FXMLLoader.load(getClass().getResource("view.fxml"));
+	Parent viewParent = FXMLLoader.load(getClass().getResource("fxml/view.fxml"));
 	Scene viewScene = new Scene(viewParent);
 	Stage mainStage = (Stage) (((Node) event.getSource()).getScene().getWindow());
 	mainStage.setScene(viewScene);
