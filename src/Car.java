@@ -54,7 +54,7 @@ public abstract class Car {
      * sets distance variable
      * @param distance distance to car in front
      */
-    protected void setDistance(returnDistance()){
+    protected void setDistance(double distance){
         this.distance = distance;
     }
 
