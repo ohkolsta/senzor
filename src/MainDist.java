@@ -9,7 +9,7 @@ public class MainDist {
     public static void main( String[] args ) {
         Pin echoPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
         Pin trigPin = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
-        DistanceMonitor monitor = new DistanceMonitor( echoPin, trigPin );
+        DistanceMonitor monitor = new DistanceMonitor();
 
         while( true ) {
             try {

@@ -34,7 +34,7 @@ public class DistanceMonitor {
     private final Pin echoPin2 = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
     private final Pin trigPin2 = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
 
-    public DistanceMonitor( Pin echoPin2, Pin trigPin2 ) { //was Pin echoPin, Pin trigPin
+    public DistanceMonitor() { //was Pin echoPin, Pin trigPin
         this.echoPin = gpio.provisionDigitalInputPin( echoPin2 );
         this.trigPin = gpio.provisionDigitalOutputPin( trigPin2 );
         this.trigPin.low();
@@ -160,7 +160,7 @@ public class DistanceMonitor {
     }
 
     public static void main(String[] args){
-    	DistanceMonitor dist = new DistanceMonitor(RaspiPin.GPIO_00, RaspiPin.GPIO_00 );
+    	DistanceMonitor dist = new DistanceMonitor();
     	dist.read("cardata/distSim.txt");
     	dist.speed.remove(0);
     }

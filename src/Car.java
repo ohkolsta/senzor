@@ -18,7 +18,6 @@ public class Car {
         reader.read(carString);
         distReader = new SimDist();
         distReader.read(distFileName);
-        
     }
 
 
@@ -90,7 +89,9 @@ public class Car {
     }
     
     protected void setDistance(){
-    	this.distance = distReader.distance.remove(0);
+    	if(distReader.distance.size() > 0){
+        	this.distance = distReader.distance.remove(0);
+    	}
     }
     
     protected double getDistance(){

@@ -1,3 +1,6 @@
+import com.pi4j.io.gpio.Pin;
+import com.pi4j.io.gpio.RaspiPin;
+
 /*import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 */
@@ -9,7 +12,7 @@ import com.pi4j.io.gpio.RaspiPin;
 
 public class GUIService {
 
-
+	DistanceMonitor monitor;
 	Car car;
 	SimDist sim;
 	public double distance;
@@ -19,19 +22,17 @@ public class GUIService {
 
 	public GUIService() throws InterruptedException {
 		car = new Car("cardata/velocity_car_1.txt", "cardata/distSim.txt");
+		//monitor = new DistanceMonitor();
 	}
 	
-	//Pin echoPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
-    //Pin trigPin = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
 	
 	public double getDistanceSim(){ //this is just for simulation
 		car.setDistance();
     	return car.getDistance();
 	}
     	
+	
     /*public double getDistanceFromSensor(){
-        DistanceMonitor monitor = new DistanceMonitor( echoPin, trigPin );
-
         while( true ) {
             try {
                 return monitor.measureDistance();
@@ -54,7 +55,7 @@ public class GUIService {
 	}
 	
 	public double getSeconds() throws InterruptedException{
-		return getDistanceSim()/getSpeed(); //might want to check speed so we don't divide by zero
+		return car.distance/getSpeed(); //might want to check speed so we don't divide by zero
     }
 	
 	//CalculateWarningEveryHalfSecond loops forever. should return speed in m/s

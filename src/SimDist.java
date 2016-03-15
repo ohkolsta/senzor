@@ -20,10 +20,8 @@ public class SimDist {
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				double dist = Double.valueOf(sCurrentLine);
-				//sCurrentLine.indexOf(',');
 				distance.add(dist);
 			}
-			System.out.println(distance);
 
 		} catch (IOException e) {
 			e.printStackTrace();
