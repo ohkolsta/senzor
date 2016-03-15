@@ -115,16 +115,6 @@ public class Car {
          * @param speed speed the car holds
          * @return if warning should be displayed
          */
-        public boolean warning(double distance, double speed){
-            System.out.println(distance/speed + " seconds");
-            if(distance/speed < 3){
-                System.out.println("Warning!");
-                return true;
-            } else {
-                System.out.println("No warning");
-                return false;
-            }
-        }
 
     public double getSeconds(){
         checkSpeed(this.speed);
@@ -132,6 +122,16 @@ public class Car {
         setSpeed();
         return (distance/speed);
     }
-
+    
+    public boolean warning(double distance, double speed){
+         System.out.println(distance/speed + " seconds");
+         if(distance/speed < 3){
+             System.out.println("Warning!");
+             return true;
+         } else {
+             System.out.println("No warning");
+             return false;
+         }
+     }
 }
 

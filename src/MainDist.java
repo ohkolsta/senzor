@@ -4,7 +4,7 @@ import com.pi4j.io.gpio.RaspiPin;
 //Denne klassen er kun for backup i tilfelle mod av DistanceMonitor ikke funker
 
 
-public class Main {
+public class MainDist {
 
     public static void main( String[] args ) {
         Pin echoPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
