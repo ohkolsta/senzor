@@ -40,7 +40,7 @@ public class GUIService {
 	
 	
 	public boolean displayWarning() throws InterruptedException{
-		if(getDistanceSim()/getSpeed() > 3){ //change to getDistanceFromSensor() if using RPi + sensor
+		if(getDistanceSim()/getSpeed() < 3){ //change to getDistanceFromSensor() if using RPi + sensor
 			return true;
 		}
 		return false;
