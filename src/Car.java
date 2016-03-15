@@ -8,7 +8,7 @@ public class Car {
     /**
      * declaration of variables
      */
-    public double distance = 100;
+    public double distance;
     public double speed;
     public ReadData reader;
 
@@ -21,7 +21,7 @@ public class Car {
     /**
      * Calculates warning every half second using the speed from file
      */
-    protected void CalculateWarningEveryHalfSecond(){
+   /* protected void CalculateWarningEveryHalfSecond(){
         while (reader.velocity.size() != 0) {
             checkSpeed(this.speed);
             checkDistance(this.distance);
@@ -35,7 +35,7 @@ public class Car {
                 System.out.println("Thread error");
             }
         }
-    }
+    }*/
 
     /**
      * checks if speed is over 20kph, converts speed to m/s and sets value
@@ -51,13 +51,6 @@ public class Car {
         }
     }
 
-    /**
-     * sets distance variable
-     * @param distance distance to car in front
-     */
-    protected void setDistance(double distance){
-        this.distance = distance;
-    }
 
 
     /**
@@ -82,14 +75,7 @@ public class Car {
         this.speed = reader.velocity.remove(0);
     }
 
-    /**
-     * returns distance
-     * @return distance
-     */
 
-    protected double getDistance(){
-        return this.distance;
-    }
 
     /**
      * returns speed
@@ -109,12 +95,8 @@ public class Car {
         return speedInMilesPerHour/0.44704;
     }
 
-        /**
-         * tells if warning should be displayed
-         * @param distance distance to car in front
-         * @param speed speed the car holds
-         * @return if warning should be displayed
-         */
+
+
 
     public double getSeconds(){
         checkSpeed(this.speed);

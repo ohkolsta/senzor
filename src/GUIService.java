@@ -8,13 +8,30 @@ import com.pi4j.io.gpio.RaspiPin;
 
 
 public class GUIService {
+
+
+	Car car;
+	SimDist sim;
+	public double distance;
+	public double seconds;
+	public double speed;
+	public boolean warning;
+
+	public GUIService() {
+		car = new Car("cardata/velocity_car_1.txt");
+		sim = new SimDist();
+		try {
+			sim.read("cardata/distSim.txt");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	//Pin echoPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
     //Pin trigPin = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
 	
-	public double getDistanceSim() throws InterruptedException{ //this is just for simulation
-		SimDist sim = new SimDist();
-    	return sim.read("cardata/distSim.txt");
+	public double getDistanceSim(){ //this is just for simulation
+    	return sim.getDistanceFromFile();
 	}
     	
     /*public double getDistanceFromSensor(){
@@ -27,12 +44,6 @@ public class GUIService {
             catch( Exception e ) {
                 System.err.println( e );
             }
-
-            try {
-                Thread.sleep( 1000 );
-            } catch (InterruptedException ex) {
-                System.err.println( "Interrupt during trigger" );
-            }
         }
     }
     */
@@ -40,7 +51,7 @@ public class GUIService {
 	
 	
 	public boolean displayWarning() throws InterruptedException{
-		if(getDistanceSim()/getSpeed() < 3){ //change to getDistanceFromSensor() if using RPi + sensor
+		if(getSeconds() < 3){ //change to getDistanceFromSensor() if using RPi + sensor
 			return true;
 		}
 		return false;
@@ -48,21 +59,49 @@ public class GUIService {
 	}
 	
 	public double getSeconds() throws InterruptedException{
-		return getSpeed()/getDistanceSim(); //might want to check speed so we don't divide by zero 
+		return getDistanceSim()/getSpeed(); //might want to check speed so we don't divide by zero
     }
 	
 	//CalculateWarningEveryHalfSecond loops forever. should return speed in m/s
 	public double getSpeed(){
-		Car car = new Car("cardata/velocity_car_1.txt");
-	    car.CalculateWarningEveryHalfSecond(); //
-		return 0; //should return the speed in m/s: return car.calculateWarningEveryHalfSecond();
+	    car.setSpeed();
+		return car.getSpeed();
+		 //should return the speed in m/s: return car.calculateWarningEveryHalfSecond();
+	}
+
+	public double getSpeedInKph(){
+		return getSpeed()*3.6;
+	}
+
+	public void interval(){
+		try {
+			while(car.reader.velocity.size() != 0 && sim.distance.size() != 0) {
+				this.distance = getDistanceSim();
+				this.speed = getSpeedInKph();
+				this.seconds = getSeconds();
+				this.warning =displayWarning();
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+
+	}
+
+	public void sleep(long milli) throws  InterruptedException{
+		Thread.sleep(milli);
 	}
 	
 	public static void main(String[] args) throws InterruptedException{
 		GUIService toGUI = new GUIService();
-		System.out.println(toGUI.getDistanceSim() + " metres");
-		System.out.println(toGUI.getSpeed() + " m/s");
-		System.out.println(toGUI.getSeconds() + " seconds");
-		System.out.println(toGUI.displayWarning() + " Displays warning");
+
+		while(toGUI.car.reader.velocity.size()!=0) {
+			System.out.println(toGUI.getDistanceSim() + " metres behind");
+			System.out.println(toGUI.getSpeedInKph() + " km/h");
+			System.out.println(toGUI.getSeconds() + " seconds behind");
+			System.out.println(toGUI.displayWarning() + " Displays warning");
+			toGUI.sleep(1000);
+		}
 	}
 }
