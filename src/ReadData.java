@@ -16,8 +16,6 @@ public class ReadData {
     ArrayList<Double> velocity = new ArrayList<Double>();
 
 
-
-
 	/**
 	 * reads velocity from file and adds it velocity-list
 	 * @param filename filename of the file read

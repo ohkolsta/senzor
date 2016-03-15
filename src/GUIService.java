@@ -53,7 +53,7 @@ public class GUIService {
 	
 	//CalculateWarningEveryHalfSecond loops forever. should return speed in m/s
 	public double getSpeed(){
-		Car_1 car = new Car_1();
+		Car car = new Car("cardata/velocity_car_1.txt");
 	    car.CalculateWarningEveryHalfSecond(); //
 		return 0; //should return the speed in m/s: return car.calculateWarningEveryHalfSecond();
 	}
