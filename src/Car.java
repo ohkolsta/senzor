@@ -2,7 +2,7 @@
  * Created by thomaskleiven on 10.03.2016.
  */
 
-public abstract class Car {
+public class Car {
 
 
     /**
@@ -12,18 +12,15 @@ public abstract class Car {
     public double speed;
     public ReadData reader;
 
-    public Car(){
+    public Car(String carString){
         reader = new ReadData();
+        reader.read(carString);
     }
 
 
     /**
      * Calculates warning every half second using the speed from file
      */
-
-
-
-
     protected void CalculateWarningEveryHalfSecond(){
         while (reader.velocity.size() != 0) {
             checkSpeed(this.speed);

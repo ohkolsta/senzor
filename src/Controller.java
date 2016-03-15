@@ -9,18 +9,21 @@ import javafx.stage.Stage;
 import javafx.application.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.text.DecimalFormat;
 
 public class Controller {
 
-    @FXML private Label secondsLabel;
+    @FXML
+    private Label secondsLabel;
     private Car car;
-    public boolean running;
+    private boolean running;
+    private boolean warning;
 
 
     public void initialize(){
-        car = new Car_1();
+        car = new Car("cardata/velocity_car_1.txt");
+        warning = false;
         startLogging();
-
     }
 
 
@@ -33,7 +36,15 @@ public class Controller {
             public void run() {
                 Platform.runLater(() -> {
                     if(running) {
-                        secondsLabel.setText(String.valueOf(Math.round(car.getSeconds())));
+                        DecimalFormat format = new DecimalFormat("##.00");
+                        double seconds = car.getSeconds();
+                        if(seconds<3){
+                            warning=true;
+                        }
+                        else{
+                            warning = false;
+                        }
+                        secondsLabel.setText(String.valueOf(format.format(car.getSeconds())+" Sec"));
                         Platform.setImplicitExit(true);
 
                     }
@@ -49,7 +60,7 @@ public class Controller {
 
 
     @FXML public void settingsButton(ActionEvent event) throws IOException{
-    	Parent settingsParent = FXMLLoader.load(getClass().getResource("fxml/Settings.fxml"));
+    	Parent settingsParent = FXMLLoader.load(getClass().getResource("fxml/settings.fxml"));
     	Scene settingsScene = new Scene(settingsParent);
     	Stage mainStage = (Stage) (((Node) event.getSource()).getScene().getWindow());
     	mainStage.setScene(settingsScene);

@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="507.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <Label fx:id="secondsLabel" layoutX="118.0" layoutY="86.0" prefHeight="98.0" prefWidth="341.0" text="Sekunder">
+      <Label fx:id="secondsLabel" alignment="CENTER" layoutX="128.0" layoutY="73.0" prefHeight="98.0" prefWidth="345.0" text="10 seconds">
          <font>
-            <Font size="73.0" />
+            <Font size="52.0" />
          </font>
       </Label>
-      <Button layoutX="436.0" layoutY="446.0" mnemonicParsing="false" onAction="#settingsButton" text="Settings" />
-      <Button layoutX="367.0" layoutY="446.0" mnemonicParsing="false" onAction="#stopPressed" text="Stop" />
+      <Button layoutX="484.0" layoutY="323.0" mnemonicParsing="false" onAction="#settingsButton" text="Settings" />
+      <Button layoutX="405.0" layoutY="323.0" mnemonicParsing="false" onAction="#stopPressed" text="Stop" />
    </children>
 </Pane>

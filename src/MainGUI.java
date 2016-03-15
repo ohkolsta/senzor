@@ -12,8 +12,8 @@ public class MainGUI extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/view.fxml"));
         primaryStage.setTitle("Senzor");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setWidth(550);
-        primaryStage.setHeight(500);
+        primaryStage.setWidth(600);
+        primaryStage.setHeight(400);
         primaryStage.show();
     }
 
