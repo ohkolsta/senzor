@@ -1,6 +1,6 @@
-import com.pi4j.io.gpio.Pin;
+/*import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
-
+*/
 
 //this class makes it easy for GUI to get the data
 //commented code is used with RPi
@@ -17,21 +17,16 @@ public class GUIService {
 	public double speed;
 	public boolean warning;
 
-	public GUIService() {
-		car = new Car("cardata/velocity_car_1.txt");
-		sim = new SimDist();
-		try {
-			sim.read("cardata/distSim.txt");
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+	public GUIService() throws InterruptedException {
+		car = new Car("cardata/velocity_car_1.txt", "cardata/distSim.txt");
 	}
 	
 	//Pin echoPin = RaspiPin.GPIO_02; // PI4J custom numbering (pin 13)
     //Pin trigPin = RaspiPin.GPIO_00; // PI4J custom numbering (pin 11)
 	
 	public double getDistanceSim(){ //this is just for simulation
-    	return sim.getDistanceFromFile();
+		car.setDistance();
+    	return car.getDistance();
 	}
     	
     /*public double getDistanceFromSensor(){
@@ -79,7 +74,7 @@ public class GUIService {
 				this.distance = getDistanceSim();
 				this.speed = getSpeedInKph();
 				this.seconds = getSeconds();
-				this.warning =displayWarning();
+				this.warning = displayWarning();
 			}
 		}
 		catch(Exception e){

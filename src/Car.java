@@ -11,10 +11,14 @@ public class Car {
     public double distance;
     public double speed;
     public ReadData reader;
+    public SimDist distReader;
 
-    public Car(String carString){
+    public Car(String carString, String distFileName) throws InterruptedException{
         reader = new ReadData();
         reader.read(carString);
+        distReader = new SimDist();
+        distReader.read(distFileName);
+        
     }
 
 
@@ -84,6 +88,14 @@ public class Car {
     protected double getSpeed(){
         return this.speed;
     }
+    
+    protected void setDistance(){
+    	this.distance = distReader.distance.remove(0);
+    }
+    
+    protected double getDistance(){
+    	return this.distance;
+    }
 
 
     /**
@@ -94,9 +106,6 @@ public class Car {
     public double convertSpeedToMsFromMilesPerHour(double speedInMilesPerHour){
         return speedInMilesPerHour/0.44704;
     }
-
-
-
 
     public double getSeconds(){
         checkSpeed(this.speed);

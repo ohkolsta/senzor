@@ -11,8 +11,7 @@ import com.pi4j.io.gpio.RaspiPin;
 public class SimDist {
 
 	ArrayList<Double> distance = new ArrayList<Double>();
-	double dist;
-
+	
 
 	public void read(String filename) throws InterruptedException {
 
@@ -21,22 +20,19 @@ public class SimDist {
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				double dist = Double.valueOf(sCurrentLine);
+				//sCurrentLine.indexOf(',');
 				distance.add(dist);
 			}
+			System.out.println(distance);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public double getDistanceFromFile() {
-		return distance.remove(0);
-	}
-
-
     public static void main(String[] args) throws InterruptedException{
     	SimDist sim = new SimDist();
-		sim.read("cardata/distSim.txt");
+        sim.read("cardata/distSim.txt");
 	}
 
 }
