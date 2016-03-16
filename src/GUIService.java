@@ -23,6 +23,8 @@ public class GUIService {
 	public GUIService(){
 		try{
 			car = new Car("cardata/velocity_car_1.txt", "cardata/distSim.txt");
+			car.setDistance();
+			car.setSpeed();
 		}
 		catch(InterruptedException e){
 			e.printStackTrace();
@@ -51,7 +53,7 @@ public class GUIService {
 	
 	
 	
-	public boolean displayWarning() throws InterruptedException{
+	public boolean displayWarning() {
 		if(getSeconds() < 3){ //change to getDistanceFromSensor() if using RPi + sensor
 			return true;
 		}

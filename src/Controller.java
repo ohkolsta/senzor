@@ -5,6 +5,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.application.*;
 import java.util.Timer;
@@ -13,8 +16,10 @@ import java.text.DecimalFormat;
 
 public class Controller {
 
-    @FXML
-    private Label secondsLabel;
+    public Label kilometerLabel;
+    public Label meterLabel;
+    public Label secondsLabel;
+    public Rectangle card;
     private GUIService model;
     private boolean running;
     private boolean warning;
@@ -29,8 +34,6 @@ public class Controller {
 
 
     public void startLogging(){
-        model.getSpeed();
-        model.getDistanceSim();
         running = true;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -38,15 +41,21 @@ public class Controller {
             public void run() {
                 Platform.runLater(() -> {
                     if(running) {
-                        DecimalFormat format = new DecimalFormat("##.00");
+                        DecimalFormat format = new DecimalFormat("#0.00");
+                        int speed = (int) model.getSpeedInKph();
+                        int distance = (int)model.getDistanceSim();
                         double seconds = model.getSeconds();
-                        if(seconds<3){
-                            warning=true;
+                        boolean warning = model.displayWarning();
+                        if(warning){
+                            secondsLabel.setTextFill(Color.web("#ff0000"));
                         }
                         else{
-                            warning = false;
+                            secondsLabel.setTextFill(Color.web("#ffffff"));
                         }
-                        secondsLabel.setText(String.valueOf(format.format(model.getDistanceSim())+" Sec"));
+
+                        secondsLabel.setText(String.valueOf(format.format(model.getSeconds())+" sec"));
+                        kilometerLabel.setText(String.valueOf(speed)+" km/h");
+                        meterLabel.setText(String.valueOf(distance)+" meters");
                         Platform.setImplicitExit(true);
 
                     }
