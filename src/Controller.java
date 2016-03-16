@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.application.*;
 import java.util.Timer;
@@ -22,12 +24,9 @@ public class Controller {
     public Rectangle card;
     private GUIService model;
     private boolean running;
-    private boolean warning;
-
 
     public void initialize(){
         model = new GUIService();
-        warning = false;
         startLogging();
     }
 
@@ -69,13 +68,18 @@ public class Controller {
 
     }
 
-
+    /*
     @FXML public void settingsButton(ActionEvent event) throws IOException{
-    	Parent settingsParent = FXMLLoader.load(getClass().getResource("fxml/settings.fxml"));
-    	Scene settingsScene = new Scene(settingsParent);
-    	Stage mainStage = (Stage) (((Node) event.getSource()).getScene().getWindow());
-    	mainStage.setScene(settingsScene);
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Label("Settings"));
+        Scene dialogScene = new Scene(dialogVbox, 300, 300);
+        dialog.setScene(dialogScene);
+        dialog.show();
     }
+    */
+
 
 
     public void stopPressed(ActionEvent actionEvent) {

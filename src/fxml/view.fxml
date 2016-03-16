@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <Rectangle id="card" fx:id="card" arcHeight="5.0" arcWidth="5.0" fill="LIGHTSEAGREEN" height="214.0" layoutX="70.0" layoutY="40.0" stroke="#838383" strokeType="INSIDE" width="461.0" />
+      <Rectangle id="card" fx:id="card" arcHeight="5.0" arcWidth="5.0" fill="#f0ad4f" height="214.0" layoutX="70.0" layoutY="40.0" stroke="WHITE" strokeType="INSIDE" width="461.0" />
       <Label fx:id="secondsLabel" layoutX="197.0" layoutY="30.0" prefHeight="98.0" prefWidth="237.0" text="10 sec" textFill="WHITE">
          <font>
             <Font size="52.0" />
