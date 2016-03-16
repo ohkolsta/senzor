@@ -92,6 +92,11 @@ public class Car {
     	if(distReader.distance.size() > 0){
         	this.distance = distReader.distance.remove(0);
     	}
+        else{
+            distReader.read("cardata/distSim.txt");
+            this.distance = distReader.distance.remove(0);
+        }
+
     }
     
     protected double getDistance(){

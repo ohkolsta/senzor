@@ -20,8 +20,15 @@ public class GUIService {
 	public double speed;
 	public boolean warning;
 
-	public GUIService() throws InterruptedException {
-		car = new Car("cardata/velocity_car_1.txt", "cardata/distSim.txt");
+	public GUIService(){
+		try{
+			car = new Car("cardata/velocity_car_1.txt", "cardata/distSim.txt");
+			car.setDistance();
+			car.setSpeed();
+		}
+		catch(InterruptedException e){
+			e.printStackTrace();
+		}
 		//monitor = new DistanceMonitor();
 	}
 	
@@ -46,7 +53,7 @@ public class GUIService {
 	
 	
 	
-	public boolean displayWarning() throws InterruptedException{
+	public boolean displayWarning() {
 		if(getSeconds() < 3){ //change to getDistanceFromSensor() if using RPi + sensor
 			return true;
 		}
@@ -54,7 +61,7 @@ public class GUIService {
 		
 	}
 	
-	public double getSeconds() throws InterruptedException{
+	public double getSeconds(){
 		return car.distance/getSpeed(); //might want to check speed so we don't divide by zero
     }
 	
@@ -91,7 +98,6 @@ public class GUIService {
 	
 	public static void main(String[] args) throws InterruptedException{
 		GUIService toGUI = new GUIService();
-
 		while(toGUI.car.reader.velocity.size()!=0) {
 			System.out.println(toGUI.getDistanceSim() + " metres behind");
 			System.out.println(toGUI.getSpeedInKph() + " km/h");
