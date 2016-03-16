@@ -13,7 +13,7 @@ public class SimDist {
 	ArrayList<Double> distance = new ArrayList<Double>();
 	
 
-	public void read(String filename) throws InterruptedException {
+	public void read(String filename){
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
 			String sCurrentLine;

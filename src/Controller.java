@@ -15,13 +15,13 @@ public class Controller {
 
     @FXML
     private Label secondsLabel;
-    private Car car;
+    private GUIService model;
     private boolean running;
     private boolean warning;
 
 
     public void initialize(){
-        car = new Car("cardata/velocity_car_1.txt");
+        model = new GUIService();
         warning = false;
         startLogging();
     }
@@ -29,6 +29,8 @@ public class Controller {
 
 
     public void startLogging(){
+        model.getSpeed();
+        model.getDistanceSim();
         running = true;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -37,14 +39,14 @@ public class Controller {
                 Platform.runLater(() -> {
                     if(running) {
                         DecimalFormat format = new DecimalFormat("##.00");
-                        double seconds = car.getSeconds();
+                        double seconds = model.getSeconds();
                         if(seconds<3){
                             warning=true;
                         }
                         else{
                             warning = false;
                         }
-                        secondsLabel.setText(String.valueOf(format.format(car.getSeconds())+" Sec"));
+                        secondsLabel.setText(String.valueOf(format.format(model.getDistanceSim())+" Sec"));
                         Platform.setImplicitExit(true);
 
                     }
@@ -54,7 +56,7 @@ public class Controller {
                     }
                 });
             }
-        },0, 200);
+        },0, 1000);
 
     }
 

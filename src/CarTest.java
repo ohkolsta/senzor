@@ -3,12 +3,15 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class CarTest {
-	
+
+    private Car car1;
+	private Car car2;
+
 	public CarTest() throws InterruptedException{
 
-	    Car car1 = new Car("../cardata/velocity_car_1.txt", "cardata/distSim.txt");
+	    car1 = new Car("../cardata/velocity_car_1.txt", "cardata/distSim.txt");
 
-	    Car car2 = new Car("../cardata/velocity_car_2.txt", "cardata/distSim.txt");
+	    car2 = new Car("../cardata/velocity_car_2.txt", "cardata/distSim.txt");
 		
 	}
     @Test
