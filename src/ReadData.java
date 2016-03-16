@@ -31,7 +31,7 @@ public class ReadData {
 					sCurrentLine = sCurrentLine.substring(32);
 					double speed = Double.valueOf(sCurrentLine.substring(0,
 							sCurrentLine.indexOf(',')));
-					if(speed != 0){
+					if(speed > 20){
 						velocity.add(speed);
 					}
 				}
