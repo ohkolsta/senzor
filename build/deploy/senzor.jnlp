@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="senzor.jnlp">
+  <information>
+    <title>senzor</title>
+    <vendor>Unicorns</vendor>
+    <description>Senzor</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="senzor.jar" size="15975" download="eager" />
+    <jar href="libs\junit.jar" size="314932" download="eager" />
+    <jar href="libs\org.hamcrest.core_1.3.0.v201303031735.jar" size="55198" download="eager" />
+    <jar href="libs\pi4j-core-javadoc.jar" size="811266" download="eager" />
+    <jar href="libs\pi4j-core-sources.jar" size="219956" download="eager" />
+    <jar href="libs\pi4j-core.jar" size="179187" download="eager" />
+    <jar href="libs\pi4j-device-javadoc.jar" size="1336691" download="eager" />
+    <jar href="libs\pi4j-device-sources.jar" size="253561" download="eager" />
+    <jar href="libs\pi4j-device.jar" size="217311" download="eager" />
+    <jar href="libs\pi4j-example-javadoc.jar" size="210186" download="eager" />
+    <jar href="libs\pi4j-example-sources.jar" size="84733" download="eager" />
+    <jar href="libs\pi4j-example.jar" size="107047" download="eager" />
+    <jar href="libs\pi4j-gpio-extension-javadoc.jar" size="217261" download="eager" />
+    <jar href="libs\pi4j-gpio-extension-sources.jar" size="66626" download="eager" />
+    <jar href="libs\pi4j-gpio-extension.jar" size="74078" download="eager" />
+    <jar href="libs\pi4j-service-javadoc.jar" size="86568" download="eager" />
+    <jar href="libs\pi4j-service-sources.jar" size="16651" download="eager" />
+    <jar href="libs\pi4j-service.jar" size="17663" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="0" height="0" main-class="MainGUI"  name="Senzor" />
+  <update check="background"/>
+</jnlp>

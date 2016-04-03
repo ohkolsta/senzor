@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project name="senzor" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<target name="init-fx-tasks">
+		<path id="fxant">
+			<filelist>
+				<file name="${java.home}\..\lib\ant-javafx.jar"/>
+				<file name="${java.home}\lib\jfxrt.jar"/>
+			</filelist>
+		</path>
+	
+		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml"
+			uri="javafx:com.sun.javafx.tools.ant"
+			classpathref="fxant"/>
+	</target>
+	<target name="setup-staging-area">
+		<delete dir="externalLibs" />
+		<delete dir="project" />
+		<delete dir="projectRefs" />
+	
+		<mkdir dir="externalLibs" />
+	
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-gpio-extension.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-service-sources.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-device.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-service.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-example-javadoc.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-service-javadoc.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-device-javadoc.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-core-javadoc.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-core.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-gpio-extension-javadoc.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-example-sources.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-core-sources.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-device-sources.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\eclipse-SDK-4.5.2-win32-x86_64\eclipse\plugins">
+				<filename name="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-example.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\pi4j-1.0\pi4j-1.0\lib">
+				<filename name="pi4j-gpio-extension-sources.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\OleHenrik\Downloads\eclipse-SDK-4.5.2-win32-x86_64\eclipse\plugins\org.junit_4.12.0.v201504281640">
+				<filename name="junit.jar"/>
+			</fileset>
+		</copy>
+	
+		<mkdir dir="project" />
+		<copy todir="project">
+			<fileset dir="C:\Users\OleHenrik\SkyDrive\NTNU\Andre\PU\Repo\senzor">
+				<include name="src\senzorpack/**" />
+			</fileset>
+		</copy>
+		<copy todir="project">
+			<fileset dir="C:\Users\OleHenrik\SkyDrive\NTNU\Andre\PU\Repo\senzor">
+				<include name="src/**" />
+			</fileset>
+		</copy>
+		<copy todir="project">
+			<fileset dir="C:\Users\OleHenrik\SkyDrive\NTNU\Andre\PU\Repo\senzor">
+				<include name="src\test\java/**" />
+			</fileset>
+		</copy>
+	
+		<mkdir dir="projectRefs" />
+	</target>
+	<target name='do-compile'>
+		<delete dir="build" />
+		<mkdir dir="build/src" />
+		<mkdir dir="build/libs" />
+		<mkdir dir="build/classes" />
+	
+		<!-- Copy project-libs references -->
+		<copy todir="build/libs">
+			<fileset dir="externalLibs">
+				<include name="pi4j-service-sources.jar"/>
+				<include name="pi4j-core.jar"/>
+				<include name="pi4j-core-sources.jar"/>
+				<include name="pi4j-example.jar"/>
+				<include name="pi4j-device-sources.jar"/>
+				<include name="pi4j-gpio-extension.jar"/>
+				<include name="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+				<include name="junit.jar"/>
+				<include name="pi4j-service-javadoc.jar"/>
+				<include name="pi4j-device-javadoc.jar"/>
+				<include name="pi4j-example-javadoc.jar"/>
+				<include name="pi4j-gpio-extension-javadoc.jar"/>
+				<include name="pi4j-service.jar"/>
+				<include name="pi4j-example-sources.jar"/>
+				<include name="pi4j-device.jar"/>
+				<include name="pi4j-gpio-extension-sources.jar"/>
+				<include name="pi4j-core-javadoc.jar"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project references -->
+	
+		<!-- Copy project sources itself -->
+		<copy todir="build/src">
+			<fileset dir="project/src/test/java">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="project/src/senzorpack">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="project/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="build/src" destdir="build/classes" encoding="Cp1252">
+			<classpath>
+				<fileset dir="build/libs">
+					<include name="*"/>
+				</fileset>
+			</classpath>
+		</javac>
+	
+		<!-- Copy over none Java-Files -->
+		<copy todir="build/classes">
+		<fileset dir="project/src/test/java">
+			<exclude name="**/*.java"/>
+		</fileset>
+		<fileset dir="project/src/senzorpack">
+			<exclude name="**/*.java"/>
+		</fileset>
+		<fileset dir="project/src">
+			<exclude name="**/*.java"/>
+		</fileset>
+		</copy>
+	
+	
+	</target>
+	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
+		<delete file="dist"/>
+		<delete file="deploy" />
+	
+		<mkdir dir="dist" />
+		<mkdir dir="dist/libs" />
+	
+		<copy todir="dist/libs">
+			<fileset dir="externalLibs">
+				<include name="*" />
+			</fileset>
+		</copy>
+	
+	
+		<fx:resources id="appRes">
+			<fx:fileset dir="dist" includes="senzor.jar"/>
+			<fx:fileset dir="dist" includes="libs/*"/>
+		</fx:resources>
+	
+		<fx:application id="fxApplication"
+			name="Senzor"
+			mainClass="MainGUI"
+			toolkit="fx"
+		/>
+	
+		<mkdir dir="build/classes/META-INF" />
+	
+	
+	
+		<fx:jar destfile="dist/senzor.jar">
+			<fx:application refid="fxApplication"/>
+			<fileset dir="build/classes">
+			</fileset>
+			<fx:resources refid="appRes"/>
+	
+			<manifest>
+				<attribute name="Implementation-Vendor" value="Unicorns"/>
+				<attribute name="Implementation-Title" value="Senzor"/>
+				<attribute name="Implementation-Version" value="0.9"/>
+				<attribute name="JavaFX-Feature-Proxy" value="None"/>
+			</manifest>
+		</fx:jar>
+	
+	
+		<mkdir dir="deploy" />
+		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
+		<fx:deploy
+			embedJNLP="false"
+			extension="false"
+			includeDT="false"
+			offlineAllowed="true"
+			outdir="${basedir}/deploy"
+			outfile="senzor" nativeBundles="none"
+			updatemode="background" >
+	
+			<fx:platform basedir="${java.home}"/>
+			<fx:info title="senzor" vendor="Unicorns"/>
+	
+			<fx:application refId="fxApplication"/>
+			<fx:resources refid="appRes"/>
+		</fx:deploy>
+	
+	
+	</target>
+</project>
