@@ -12,8 +12,10 @@ public class Car {
     public double speed;
     public ReadData reader;
     public SimDist distReader;
+    public boolean useSensor;
 
     public Car(String carString, String distFileName) throws InterruptedException{
+    	useSensor = true;
         reader = new ReadData();
         reader.read(carString);
         distReader = new SimDist();
@@ -89,14 +91,14 @@ public class Car {
     }
     
     protected void setDistance(){
-    	if(distReader.distance.size() > 0){
-        	this.distance = distReader.distance.remove(0);
+    	if(useSensor == false){
+    		if(distReader.distance.size() > 0){
+            	this.distance = distReader.distance.remove(0);
+    		}else{
+    			distReader.read("cardata/distSim.txt");
+                this.distance = distReader.distance.remove(0);
+    		}
     	}
-        else{
-            distReader.read("cardata/distSim.txt");
-            this.distance = distReader.distance.remove(0);
-        }
-
     }
     
     protected double getDistance(){

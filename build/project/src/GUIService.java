@@ -22,7 +22,9 @@ public class GUIService {
 
 	public GUIService(){
 		try{
+			System.out.println("GUIService Constructor");
 			car = new Car("cardata/velocity_car_1.txt", "cardata/distSim.txt");
+			monitor = new DistanceMonitor();
 			car.setDistance();
 			car.setSpeed();
 		}
@@ -33,23 +35,21 @@ public class GUIService {
 	}
 	
 	
-	public double getDistanceSim(){ //this is just for simulation
-		car.setDistance();
-    	return car.getDistance();
+	public double getDistanceSim(){
+		//DistanceMonitor monitor = new DistanceMonitor();
+		if(car.useSensor == true){
+			try{
+				car.distance = monitor.measureDistance();
+			}catch(Exception e){
+				System.out.println(e + " in getDistanceSim");
+			}
+		}
+		else{
+			car.setDistance();
+			car.distance = car.getDistance();
+		}
+		return car.distance;
 	}
-    	
-	
-    /*public double getDistanceFromSensor(){
-        while( true ) {
-            try {
-                return monitor.measureDistance();
-            }
-            catch( Exception e ) {
-                System.err.println( e );
-            }
-        }
-    }
-    */
 	
 	
 	

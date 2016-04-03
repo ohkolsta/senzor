@@ -1,0 +1,1 @@
+sudo /opt/jdk8/bin/java -cp /home/pi/Documents/armv6hf-sdk/rt/lib/ext/jfxrt.jar:/home/pi/Documents/senzor.jar MainGUI

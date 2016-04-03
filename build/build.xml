@@ -108,12 +108,12 @@
 		<mkdir dir="project" />
 		<copy todir="project">
 			<fileset dir="C:\Users\OleHenrik\SkyDrive\NTNU\Andre\PU\Repo\senzor">
-				<include name="src\senzorpack/**" />
+				<include name="src/**" />
 			</fileset>
 		</copy>
 		<copy todir="project">
 			<fileset dir="C:\Users\OleHenrik\SkyDrive\NTNU\Andre\PU\Repo\senzor">
-				<include name="src/**" />
+				<include name="src\senzorpack/**" />
 			</fileset>
 		</copy>
 		<copy todir="project">
