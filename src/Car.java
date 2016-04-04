@@ -15,7 +15,7 @@ public class Car {
     public boolean useSensor;
 
     public Car(String carString, String distFileName) throws InterruptedException{
-    	useSensor = true;
+    	useSensor = false;
         reader = new ReadData();
         reader.read(carString);
         distReader = new SimDist();

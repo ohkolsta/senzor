@@ -24,7 +24,9 @@ public class GUIService {
 		try{
 			System.out.println("GUIService Constructor");
 			car = new Car("cardata/velocity_car_1.txt", "cardata/distSim.txt");
-			monitor = new DistanceMonitor();
+			if(car.useSensor){
+				monitor = new DistanceMonitor();
+			}
 			car.setDistance();
 			car.setSpeed();
 		}
