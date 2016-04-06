@@ -20,6 +20,8 @@ public class GUIService {
 	public double speed;
 	public boolean warning;
 
+	private double warningTime = 3;
+
 	public GUIService(){
 		try{
 			System.out.println("GUIService Constructor");
@@ -56,7 +58,7 @@ public class GUIService {
 	
 	
 	public boolean displayWarning() {
-		if(getSeconds() < 3){ //change to getDistanceFromSensor() if using RPi + sensor
+		if(getSeconds() < warningTime){ //change to getDistanceFromSensor() if using RPi + sensor
 			return true;
 		}
 		return false;
@@ -108,4 +110,13 @@ public class GUIService {
 			toGUI.sleep(1000);
 		}
 	}
+
+	public double getWarningTime() {
+		return warningTime;
+	}
+
+	public void setWarningTime(double warningTime) {
+		this.warningTime = warningTime;
+	}
+
 }

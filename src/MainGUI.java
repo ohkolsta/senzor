@@ -9,11 +9,11 @@ public class MainGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/tab.fxml"));
         primaryStage.setTitle("Senzor");
         primaryStage.setScene(new Scene(root));
         primaryStage.setWidth(600);
-        primaryStage.setHeight(400);
+        primaryStage.setHeight(450);
         primaryStage.show();
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,10 +25,14 @@ public class Controller {
     public Rectangle card;
     private GUIService model;
     private boolean running;
+    private TabController main;
+    private Color warningColor;
 
     public void initialize(){
         model = new GUIService();
         startLogging();
+        warningColor = Color.web("#ff0000");
+
     }
 
 
@@ -45,7 +50,7 @@ public class Controller {
                             double seconds = model.getSeconds();
                             boolean warning = model.displayWarning();
                             if(warning){
-                                secondsLabel.setTextFill(Color.web("#ff0000"));
+                                secondsLabel.setTextFill(warningColor);
                             }
                             else{
                                 secondsLabel.setTextFill(Color.web("#ffffff"));
@@ -71,41 +76,9 @@ public class Controller {
         	}
         	
         }).start();
-        /*
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    if(running) {
-                        DecimalFormat format = new DecimalFormat("#0.00");
-                        int speed = (int) model.getSpeedInKph();
-                        int distance = (int)model.getDistanceSim();
-                        double seconds = model.getSeconds();
-                        boolean warning = model.displayWarning();
-                        if(warning){
-                            secondsLabel.setTextFill(Color.web("#ff0000"));
-                        }
-                        else{
-                            secondsLabel.setTextFill(Color.web("#ffffff"));
-                        }
-
-                        secondsLabel.setText(String.valueOf(format.format(model.getSeconds())+" sec"));
-                        kilometerLabel.setText(String.valueOf(speed)+" km/h");
-                        meterLabel.setText(String.valueOf(distance)+" meters");
-                        Platform.setImplicitExit(true);
-
-                    }
-                    else {
-                        timer.cancel();
-                        timer.purge();
-                    }
-                });
-            }
-        },0, 1000);
-        */
-
     }
+
+
 
     
     @FXML public void settingsButton(ActionEvent event) throws IOException{
@@ -120,8 +93,24 @@ public class Controller {
     
 
 
-
     public void stopPressed(ActionEvent actionEvent) {
         running = false;
+    }
+
+    public void attachMain(TabController tabController) {
+        this.main=tabController;
+    }
+
+    public void changeColor(Color newValue) {
+        warningColor = newValue;
+
+    }
+
+    public void changeWarningTime(int newValue) {
+        model.setWarningTime(newValue);
+    }
+
+    public void changeBackgroundColor(Color newValue) {
+        card.setFill(newValue);
     }
 }
